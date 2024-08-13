@@ -1,1 +1,2 @@
-# rock-paper-scissors
+# Rock-paper-scissors
+This project implements a simple "Rock, Paper, Scissors" game using JavaScript. The game allows a user to compete against the computer in a classic game where each player selects one of three options: Rock, Paper, or Scissors.
