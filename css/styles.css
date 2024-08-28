@@ -1,0 +1,85 @@
+/* =================================== Generals ===================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to top right, #2A74C7, #1A1F4F);
+
+}
+
+
+/* =================================== Main ===================================== */
+.container {
+    width: 40vw;
+    height: 100vh;
+    border-radius: 10px;
+    background-size: cover;
+    transition: box-shadow 250ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+
+    h1 {
+        color: #D9EDF9;
+    }
+
+    .score {
+        width: 70%;
+        display: flex;
+        justify-content: space-around;
+
+        .player-score, 
+        .computer-score {
+            color: #D9EDF9;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    }
+    
+    .buttons {
+        width: 70%;
+        display: flex;
+        justify-content: space-around;
+
+        .btn {
+            height: 80px;
+            width: 80px;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            background-color: rgb(255 255 255 / 0.4);
+            padding: 5px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .results {
+        width: 60%;
+        text-align: center;
+        
+        .show-winner {
+            border: 1px solid rgb(255 255 255 / 0.4);
+            border-radius: 20px;
+            padding: 10px 0;
+            color: #D9EDF9;
+            font-size: 1.3rem;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 0 8px rgb(0 0 0 / 0.8);
+    }
+}

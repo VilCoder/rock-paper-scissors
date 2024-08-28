@@ -1,84 +1,73 @@
-// Try to run the program if no errors occur during its execution
-try {
+try { // Try  to run the program if no errors occur during its execution
     function getComputerChoice() {
         // Generates a random number between 0 and 2
         const computerNumber = Math.floor(Math.random() * 3);
-    
-        // Evaluates the "computerNumber" value and returns an option based on the value
+
         const computerChoice = ["rock", "paper", "scissors"];
         
         return computerChoice[computerNumber];
     }
     
-    function getHumanChoice() {
-        // Captures the value entered by the user
-        let humanChoice = prompt("Enter rock, paper or scissors").toLowerCase();
-    
-        // The loop is evaluated until the user enters one of the expected values
-        while (true) {
-            if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-                return humanChoice;
-            }
-    
-            console.log("Please enter a valid value");
-            humanChoice = prompt("Enter rock, paper or scissors").toLowerCase();
-        }
-    }
-    
-    
-    // Evaluate and return the winner of the round
     function playRound (humanChoice, computerChoice) {
-        if (
-            (humanChoice === "rock" && computerChoice === "scissors") || 
-            (humanChoice === "paper" && computerChoice === "rock") || 
-            (humanChoice === "scissors" && computerChoice === "paper")
-        ) {
+        if (humanChoice === "rock" && computerChoice === "scissors") {
+            return `You win! ${humanChoice} beats ${computerChoice}`;
+        } else if (humanChoice === "paper" && computerChoice === "rock") {
+            return `You win! ${humanChoice} beats ${computerChoice}`;
+        } else if (humanChoice === "scissors" && computerChoice === "paper") {
             return `You win! ${humanChoice} beats ${computerChoice}`;
         } else if (humanChoice === computerChoice) {
-             return `Both draw`;
+             return `It's a tie`;
         } else {
             return `You lose! ${computerChoice} beats ${humanChoice}`;
         }
-    }
+    }    
     
-    
-    function playGame() {
-        // Declaration of variables
-        let humanScore = 0;
-        let computerScore = 0;
-        
-        // Sets the game to 5 rounds
-        for (let index = 0; index < 5; index++) {
+    let humanScore = 0;
+    let computerScore = 0;
 
-            const humanSelection = getHumanChoice();
+    // Selects all <buttons> elements in the document
+    const btnSelection = document.querySelectorAll("button");
+    btnSelection.forEach((selection) => {
+        selection.addEventListener("click", () => { // Add a "click" event to each button
+            // Gets the player selection based on the id of the button that was clicked
+            const playerSelection = selection.id;
+
             const computerSelection = getComputerChoice();
-    
-            console.log(`=============== Round ${index + 1} ===============`);
-            if (playRound (humanSelection, computerSelection).startsWith("You win!")) {
+            const playerScore = document.querySelector(".player-score");
+            const npcScore = document.querySelector(".computer-score");
+            const showWinner = document.querySelector(".show-winner");
+
+            // Check the result of the round and update the score and message on the screen
+            if (playRound (playerSelection, computerSelection).startsWith("You win")) {
                 humanScore += 1;
-                console.log( playRound(humanSelection, computerSelection) );
-            } else  if (playRound (humanSelection, computerSelection).startsWith("You lose!")) {
+                showWinner.textContent = playRound(playerSelection, computerSelection);
+            } else  if (playRound (playerSelection, computerSelection).startsWith("You lose")) {
                 computerScore += 1;
-                console.log( playRound(humanSelection, computerSelection) );
+                showWinner.textContent = playRound(playerSelection, computerSelection);
             } else {
-                console.log( playRound(humanSelection, computerSelection) );
+                showWinner.textContent = playRound(playerSelection, computerSelection);
             }
+            
+            playerScore.textContent = `YOU ${humanScore}`;
+            npcScore.textContent = `${computerScore} NPC`;
+            showWinner.style.background = "transparent";
     
-            console.log( `Human ${humanScore} \nComputer ${computerScore}` );
-        }
-    
-        // Evaluate and return who has won the game
-        if (humanScore > computerScore) {
-            return "You have won";
-        } else if (humanScore < computerScore) {
-            return "Yuo have lost";
-        } else {
-            return "Tied game";
-        }
-    }
-    
-    console.log( playGame() );
+            if (humanScore === 5) {
+                showWinner.textContent = "You have won the game";
+                showWinner.style.background = "#309EFF";
+                humanScore = 0;
+                computerScore = 0;
+            }
+
+            if (computerScore === 5) {
+                showWinner.textContent =  "You have lost the game";
+                showWinner.style.background = "#3A2727";
+                humanScore = 0;
+                computerScore = 0;
+            }
+        });
+    });
 }
-catch (e) { // Captures and throws possible errors during the execution of the program
+catch (e) { // Captures en throws possibles errors during the execution of the program
     console.log(e);
 }
